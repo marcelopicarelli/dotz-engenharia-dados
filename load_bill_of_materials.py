@@ -65,8 +65,6 @@ def run(argv=None):
      beam.Map(lambda s: data_ingestion.parse_method(s))
      | 'Write to BigQuery' >> beam.io.Write(
          beam.io.BigQuerySink(
-             # The table name is a required argument for the BigQuery sink.
-             # In this case we use the value passed in from the command line.
              known_args.output,
 
              schema='tube_assembly_id:STRING,component_id_1:STRING,quantity_1:FLOAT,component_id_2:STRING,quantity_2:FLOAT,component_id_3:STRING,quantity_3:FLOAT,component_id_4:STRING,quantity_4:FLOAT,component_id_5:STRING,quantity_5:FLOAT,component_id_6:STRING,quantity_6:FLOAT,component_id_7:STRING,quantity_7:FLOAT,component_id_8:STRING,quantity_8:FLOAT',
