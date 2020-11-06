@@ -53,25 +53,14 @@ def run(argv=None):
     # Analisa os argumentos da linha de comando.
     known_args, pipeline_args = parser.parse_known_args(argv)
 
-    # DataIngestion is a class we built in this script to hold the logic for
-    # transforming the file into a BigQuery table.
     data_ingestion = DataIngestion()
     
-
-    # Initiate the pipeline using the pipeline arguments passed in from the
-    # command line. This includes information such as the project ID and
-    # where Dataflow should store temp files.
     p = beam.Pipeline(options=PipelineOptions(pipeline_args))
 
     (
      p | 'Read File from GCS' >> beam.io.ReadFromText(known_args.input,
-                                                  skip_header_lines=1)
+                                                  skip_header_lines=1)    
     
-     # This stage of the pipeline translates from a CSV file single row
-     # input as a string, to a dictionary object consumable by BigQuery.
-     # It refers to a function we have written. This function will
-     # be run in parallel on different workers using input from the
-     # previous stage of the pipeline.
      | 'String To BigQuery Row' >>
      beam.Map(lambda s: data_ingestion.parse_method(s))
      | 'Write to BigQuery' >> beam.io.Write(
@@ -79,14 +68,10 @@ def run(argv=None):
              # The table name is a required argument for the BigQuery sink.
              # In this case we use the value passed in from the command line.
              known_args.output,
-             # Here we use the simplest way of defining a schema:
-             # fieldName:fieldType
 
              schema='tube_assembly_id:STRING,component_id_1:STRING,quantity_1:FLOAT,component_id_2:STRING,quantity_2:FLOAT,component_id_3:STRING,quantity_3:FLOAT,component_id_4:STRING,quantity_4:FLOAT,component_id_5:STRING,quantity_5:FLOAT,component_id_6:STRING,quantity_6:FLOAT,component_id_7:STRING,quantity_7:FLOAT,component_id_8:STRING,quantity_8:FLOAT',
 
-             # Creates the table in BigQuery if it does not yet exist.
              create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
-             # Deletes all data in the BigQuery table before writing.
              write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)))
     p.run().wait_until_finish()
 
