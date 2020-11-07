@@ -37,12 +37,12 @@ Arquivos criados:
 ## Print-Screens
 
 Exemplo de uma parte do código desenvolvido utilizando o cloud shell do console da GCP
-![alt text]https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/examplecode.png
+![alt text](https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/examplecode.png)
 
 Print das ingestões realizadas via Dataflow
-![alt text]https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/dataflow.png
+![alt text](https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/dataflow.png)
 
 Select nas tabelas que foram gravas no BigQuery
-![alt text]https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/compboss.png
-![alt text]https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/billofmaterials.png
-![alt text]
+![alt text](https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/compboss.png)
+![alt text](https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/billofmaterials.png)
+![alt text](https://github.com/marcelopicarelli/dotz-engenharia-dados/blob/main/pricequote.png)
